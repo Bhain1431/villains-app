@@ -4,27 +4,32 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {RouterModule} from "@angular/router";
-import { VillainsListPageComponent } from './pages/villains/villains-list-page/villains-list-page.component';
+import { RouterModule } from "@angular/router";
+
+import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import Services from './app.services';
+
+import 'hammerjs';
+
+import AppRoutes, { Components } from './app.routes';
+import { VillainFormComponent } from './villians/villain-form/villain-form.component';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    VillainsListPageComponent
-  ],
+
+  declarations: [AppComponent, ...Components, VillainFormComponent],
+
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      { path: 'villains', component: VillainsListPageComponent},
-      { path: '',
-        redirectTo: '/villains',
-        pathMatch: 'full'
-      },
-    ])
+    MaterialModule,
+    FlexLayoutModule,
+    RouterModule.forRoot(AppRoutes)
   ],
-  providers: [],
+  providers: Services,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
